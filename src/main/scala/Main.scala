@@ -44,13 +44,35 @@ object Main {
     (l foldRight List[A]())((x, acc) => x :: acc.dropWhile(_ == x)) // (y => y == x)
   }
 
+  //  Exercise 2
+
+  //  It is intended to keep information about the results of the matches of a soccer championship day
+  //  in the following data structure:
+
+  type Team = String
+  type Goals = Int
+  type Match = ((Team, Goals), (Team, Goals))
+  type Fixtures = List[Match]
+
+  //  Define the following methods using foldLeft or foldRight:
+  //
+  //    a) noItself which checks that no team plays with itself.
+
+  def noItself(f: Fixtures): Boolean = (f foldRight true)((x, acc) => x._1._1 != x._2._1 && acc)
+
+  //    b) withoutRep which checks that no team plays more than one game.
+  //    c) teams which gives the list of teams participating in the Fixtures.
+  //    d) draws which gives lists of pairs of teams that tied for the day.
+  //    e) points which calculates the points that each team obtained in the Fixtures
+  //      (won - 3 points; lost – 0 points; tied - 1 point).
+  //  The function should return a value of type: List[(Team, Int)]
+
 
   // main for testing purposes
 
   def main(args: Array[String]): Unit = {
 
-    val lst1 = List(1, 1, 1, 2, 2, 2, 2, 2, 3, 3, 4, 5, 5, 5, 6)
-
-    println(remDup2(lst1))
+    val f = List((("eq2", 3), ("eq3", 5)), (("eq5", 3), ("eq6", 5)))
+    println(noItself(f))
   }
 }
